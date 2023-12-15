@@ -30,7 +30,15 @@ def add_promo_codes(promo_codes):
 
 def search_promo_codes(search_term):
     session = Session()
-    query = session.query(PromoCode).filter(PromoCode.code.contains(search_term))
+    # Use ilike for case-insensitive search and add '%' wildcards for partial matches
+    query = session.query(PromoCode).filter(PromoCode.promo.ilike(f"%{search_term}%"))
     results = query.all()
     session.close()
     return results
+
+#def search_promo_codes(search_term):
+#    session = Session()
+#    query = session.query(PromoCode).filter(PromoCode.code.contains(search_term))
+#    results = query.all()
+#    session.close()
+#    return results

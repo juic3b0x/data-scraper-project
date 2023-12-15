@@ -5,32 +5,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Promo Code Search</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Search for Promo Codes</h1>
-    <form method="POST">
-        <input type="text" name="search_term" placeholder="Enter promo code" value="{{ search_term }}">
-        <button type="submit">Search</button>
-    </form>
-    {% if results %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Promo</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for promo_code in results %}
-                <tr>
-                    <td>{{ promo_code.code }}</td>
-                    <td>{{ promo_code.promo }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No results to display.</p>
-    {% endif %}
+    <div class="container mt-3">
+        <h1 class="mb-3 text-center">Search for Promo Codes</h1>
+        <form method="POST" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search_term" placeholder="Enter promo code" value="{{ search_term }}" aria-label="Search term">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Results table -->
+        {% if results %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Promo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for promo_code in results %}
+                    <tr>
+                        <td>{{ promo_code.code }}</td>
+                        <td>
+                            {% if promo_code.promo|length > 50 %}
+                            {{ promo_code.promo[:50] }}...
+                            <span tabindex="0" data-toggle="tooltip" data-placement="right" title="{{ promo_code.promo }}">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                            {% else %}
+                            {{ promo_code.promo }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            {% if search_term %}
+            <p class="text-warning">No results found for "{{ search_term }}". Please try another search term.</p>
+            {% else %}
+            <p>Enter a search term to display results.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap and FontAwesome JavaScript from CDN for tooltip functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1044ebe61a.js" crossorigin="anonymous"></script>
+
+    <script>
+    $(function () {
+        // Enable tooltips everywhere
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
 </body>
 </html>
