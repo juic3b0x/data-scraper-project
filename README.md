@@ -15,33 +15,38 @@ To set up and run this project, you will need to follow these steps:
 
 ```sh
 python3 -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate````
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
 
 2. Install the required dependencies:
 
 ```sh
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 3. Initialize the database:
 
 ```sh
-python -m database.initialize_db```
+python -m database.initialize_db
+```
 
 4. Run the scraper to populate the database with promo codes:
 
 ```sh
-python -m scraper.data_scraper```
+python -m scraper.data_scraper
+```
 
 5. Start the Flask web server:
 
 ```sh
-python -m webui.app```
+python -m webui.app
+```
 
 Visit http://127.0.0.1:5000/ in your web browser to use the application.
 
 
 ## Project Structure
-
+```
 data-scraper-project/
 │
 ├── scraper/
@@ -61,7 +66,7 @@ data-scraper-project/
 │  
 ├── requirements.txt
 └── README.md
-
+```
 ## Usage
 
 After you have completed the setup steps, you can use the web UI to search for promo codes. If you want to refresh the list of promo codes, stop the Flask server, re-run the scraper, and then start the server again.
