@@ -1,0 +1,18 @@
+data-scraper-project/
+│
+├── scraper/
+│   ├── __init__.py
+│   └── data_scraper.py
+│
+├── database/
+│   ├── __init__.py
+│   └── db_manager.py
+│
+├── webui/
+│   ├── __init__.py
+│   ├── app.py
+│   └── templates/
+│       └── search.html
+│  
+├── requirements.txt
+└── README.md

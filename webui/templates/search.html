@@ -1,0 +1,36 @@
+<!-- data-scraper-project/webui/templates/search.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promo Code Search</title>
+</head>
+<body>
+    <h1>Search for Promo Codes</h1>
+    <form method="POST">
+        <input type="text" name="search_term" placeholder="Enter promo code" value="{{ search_term }}">
+        <button type="submit">Search</button>
+    </form>
+    {% if results %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Promo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for promo_code in results %}
+                <tr>
+                    <td>{{ promo_code.code }}</td>
+                    <td>{{ promo_code.promo }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results to display.</p>
+    {% endif %}
+</body>
+</html>
